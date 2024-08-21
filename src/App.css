@@ -1,0 +1,121 @@
+.App {
+  font-style: none;
+  font-family: "JetBrains Mono";
+  background-color: #282c34;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  width: 65vw;
+  min-width: 800px;
+  height: 100vh;
+  margin: auto;
+}
+
+header {
+  height: 7vh;
+  display: flex;
+  place-items: center;
+  font-size: 2.5vh;
+}
+
+header>.icon {
+  height: 4vh;
+  margin: 1vh;
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  min-height: 90vh;
+}
+
+footer {
+  height: 3vh;
+  place-content: center;
+  text-align: center;
+  font-size: 2vh;
+}
+
+section.search {
+  grid-row: 1/4;
+  grid-column: 1/2;
+  width: 20vw;
+  min-width: 246px;
+}
+
+section.climate {
+  grid-column: 2/3;
+  width: 45vw;
+  min-width: 554px;
+}
+
+section.today {
+  grid-row: 1/2;
+}
+
+section.prediction {
+  grid-row: 2/3;
+}
+
+section.day-pred {
+  grid-row: 3/4
+}
+
+@media (max-width: 800px) {
+  .container {
+    width: 100vw;
+    min-width: 0;
+  }
+
+  section.search,
+  section.climate {
+    min-width: 0;
+  }
+
+  section.search {
+    width: 31vw;
+  }
+
+  section.climate {
+    width: 69vw;
+  }
+}
+
+@media (max-width: 720px) {
+  main {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+  }
+
+  section.search,
+  section.climate {
+    width: 100vw;
+  }
+
+  section.search {
+    grid-row: 1/2;
+  }
+
+  section.climate {
+    grid-column: 1/2;
+  }
+
+  section.today {
+    grid-row: 2/3;
+  }
+
+  section.prediction {
+    grid-row: 3/4;
+  }
+
+  section.day-pred {
+    grid-row: 4/5;
+  }
+}
