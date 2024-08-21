@@ -1,19 +1,26 @@
 import './SearchBox.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import CityItem from './CityItem'
 
-const SearchBox = () => {
+const SearchBox = ({handleQuery}) => {
+    const [inputcontroller, setInputController] = useState('')
     const [cityquery, setCityQuery] = useState(null)
+    const [data, setData] = useState([])
+    useEffect(() => {   
+        fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityquery}&limit=5&appid=`)
+            .then(response => response.ok ? response.json() : Promise.reject('Error en la solicitud'))
+            .then(data => setData(data))
+            .catch(error => console.error('Hubo un problema: ', error))
+    }, [cityquery])
     return (
         <div className='searchbox' >
-            <div className='formcity'>
-                <form onSubmit={(e) => { e.preventDefault(); setCityQuery(e.target.cityquery.value); }}>
-                    <input id='cityquery' placeholder='Type a city' className='text' type='text' />
-                    <button className='submit' type='submit'><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
-                </form>
-            </div>
-            <div>{cityquery}</div>
+            <form className='formcity' onSubmit={(e) => { e.preventDefault(); setCityQuery(e.target.cityquery.value); }}>
+                <input id='cityquery' value={inputcontroller} onChange={(e) => setInputController(e.target.value)} placeholder='Type a city' className='text' type='text' />
+                <button className='submit' type='submit' ><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
+            </form>
+            {cityquery && data.map(item => <CityItem key={[item.lat, item.lon]} handleQuery={() => handleQuery(item.lat, item.lon)} >{`${item.name} - ${item.state}, ${item.country}`}</CityItem>)}
         </div >
     )
 }

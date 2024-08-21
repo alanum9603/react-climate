@@ -1,10 +1,20 @@
 .App {
   font-style: none;
   font-family: "JetBrains Mono";
-  background-color: #282c34;
+  font-size: 1.5vh;
+  background-color: #242424;
   color: #ffffff;
   margin: 0;
   padding: 0;
+}
+
+h1 {
+  font-size: 2vh;
+  margin: 1vh;
+}
+
+p {
+  font-size: 1vh;
 }
 
 .container {
@@ -33,14 +43,14 @@ main {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  min-height: 90vh;
+  min-height: 91vh;
 }
 
 footer {
-  height: 3vh;
+  height: 2vh;
   place-content: center;
   text-align: center;
-  font-size: 2vh;
+  font-size: 1.3vh;
 }
 
 section.search {
@@ -58,14 +68,17 @@ section.climate {
 
 section.today {
   grid-row: 1/2;
+  background-color: blue;
 }
 
 section.prediction {
   grid-row: 2/3;
+  background-color: red;
 }
 
 section.day-pred {
-  grid-row: 3/4
+  grid-row: 3/4;
+  background-color: yellow;
 }
 
 @media (max-width: 800px) {
