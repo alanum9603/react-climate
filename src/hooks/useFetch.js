@@ -1,14 +1,22 @@
-import { useEffect, useState } from "react"
+import { useState, useEffect } from "react"
 
 const useFetch = (route) => {
-    const url = 'localhost/5000';
-    const [data, setData] = useState(null);
+    const url = `https://api.openweathermap.org/${route}&appid=${import.meta.env.API_KEY}`;
+    const [data, setData] = useState({});
+    const [error, setError] = useState('')
     useEffect(() => {
-        fetch(`${url}${route}`)
-            .then(response => response.json())
-            .then(data => setData(data))
-        return { data }
+        const fetchData = async () => {
+            try {
+                const response = await fetch(url)
+                const json = await response.json()
+                setData(json)
+            } catch (error) {
+                setError(error)
+            }
+        }
+        fetchData(url)
     }, []);
+    return { data, error }
 }
 
 export default useFetch;

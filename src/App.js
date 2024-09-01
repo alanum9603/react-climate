@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faReact } from '@fortawesome/free-brands-svg-icons'
 import { useState } from 'react';
 import SearchBox from './components/SearchBox';
+import useFetch from './hooks/useFetch';
 
 function App() {
   const climatedatabase = {
@@ -15,10 +16,8 @@ function App() {
   const [climatedata, setClimatedata] = useState(climatedatabase)
 
   const setData = (lat, lon) => {
-    fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=`)
-        .then(response => response.ok ? response.json() : Promise.reject('Error en la solicitud'))
-        .then(data => setClimatedata({ ...climatedata, data}))
-        .catch(error => console.error('Hubo un problema: ', error))
+    useFetch(`data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric`)
+        .then(data => console.log(data))
   }
 
   return (

@@ -3,16 +3,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react'
 import CityItem from './CityItem'
+import useFetch from '../hooks/useFetch'
 
 const SearchBox = ({handleQuery}) => {
     const [inputcontroller, setInputController] = useState('')
     const [cityquery, setCityQuery] = useState(null)
     const [data, setData] = useState([])
-    useEffect(() => {   
-        fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityquery}&limit=5&appid=`)
-            .then(response => response.ok ? response.json() : Promise.reject('Error en la solicitud'))
-            .then(data => setData(data))
-            .catch(error => console.error('Hubo un problema: ', error))
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await useFetch(`geo/1.0/direct?q=${cityquery}&limit=5`)
+            console.log(result)
+        }
     }, [cityquery])
     return (
         <div className='searchbox' >
