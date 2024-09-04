@@ -111,7 +111,7 @@ section.day-pred {
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 650px) {
   .container {
     min-width: 0;
     width: 100%;
