@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 
 const useFetch = (route) => {
-    const url = `https://api.openweathermap.org/${route}&appid=${import.meta.env.API_KEY}`;
+    const url = `https://api.openweathermap.org/${route}&appid=${process.env.API_KEY}`;
     const [data, setData] = useState({});
     const [error, setError] = useState('')
     useEffect(() => {

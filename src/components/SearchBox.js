@@ -3,22 +3,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react'
 import CityItem from './CityItem'
-import useFetch from '../hooks/useFetch'
+import useFetchCity from '../hooks/useFetchCity'
 
-const SearchBox = ({handleQuery}) => {
+const SearchBox = ({ handleQuery }) => {
     const [inputcontroller, setInputController] = useState('')
-    const [cityquery, setCityQuery] = useState(null)
-    const [data, setData] = useState([])    
-    
+    const [citylist, setCityList] = useState([])
+    const res = useFetchCity('Lima');
+    console.log(res)
+
     return (
         <div className='searchbox' >
-            <form className='formcity' onSubmit={(e) => { e.preventDefault(); }}>
-                <input id='cityquery' value={inputcontroller} onChange={(e) => setInputController(e.target.value)} placeholder='Type a city' className='text' type='text' />
-                <button className='submit' type='submit' ><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
+            <form className='formcity' onSubmit={(e) => e.preventDefault()}>
+                <input id='cityquery' className='text' type='text' placeholder='Type a city'
+                    value={inputcontroller}
+                    onChange={(e) => setInputController(e.target.value)} />
+                <button className='submit' type='submit' >
+                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </button>
             </form>
             {
-                cityquery && data.map(item => {
-                    <CityItem key={[item.lat, item.lon]} handleQuery={() => handleQuery(item.lat, item.lon)} >
+                citylist.map(item => {
+                    <CityItem key={`${item.lat}, ${item.lon}`} handleQuery={() => handleQuery(item.lat, item.lon)} >
                         {`${item.name} - ${item.state}, ${item.country}`}
                     </CityItem>
                 })
