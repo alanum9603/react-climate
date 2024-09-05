@@ -1,11 +1,15 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faReact } from '@fortawesome/free-brands-svg-icons'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SearchBox from './SearchBox';
 import './Container.css'
 
 const Container = () => {
-  const [climatedata, setClimatedata] = useState({ current: 'hi', daily: 'bye' })
+  const [climatedata, setClimatedata] = useState({ city: null, lat: null, lon: null })
+
+  useEffect(() => {
+    console.log(climatedata)
+  },[climatedata])
 
   return (
     <div className='container'>
@@ -18,7 +22,7 @@ const Container = () => {
           <SearchBox setClimatedata={setClimatedata} ></SearchBox>
         </section>
         <section className='climate today' data={climatedata.current} >
-          {climatedata.current}
+          {climatedata.city}
         </section>
         <section className='climate prediction' data={climatedata.daily} >
           {climatedata.daily}
