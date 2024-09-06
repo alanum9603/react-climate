@@ -4,6 +4,7 @@ const useFetchClimate = (climatedata) => {
     const [fetchState, setFetchState] = useState({state: 'idle', data: null, error: null})
     const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${climatedata.lat}&lon=${climatedata.lon}&exclude=hourly,minutely&units=metric&appid=${process.env.REACT_APP_API_KEY}`;
     useEffect(() => {
+        const date = new Date()
         const searchClimate = async () => {
             try {
                 setFetchState((old) => ({ 
@@ -22,7 +23,10 @@ const useFetchClimate = (climatedata) => {
                                 lat: json.lat,
                                 lon: json.lon,
                             },
-                            daily: { ...json.daily }
+                            daily: json.daily.map(item => {
+                                date.setDate(date.getDate() + 1)
+                                return {...item, date: `${date.getDay()}/${date.getMonth()}`}
+                            })
                         },
                         error: null
                     })

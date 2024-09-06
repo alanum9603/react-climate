@@ -1,0 +1,13 @@
+.climatecard {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    place-content: center;
+}
+
+.item {
+    width: 105px;
+    align-items: center;
+    text-align: center;
+    display: inline;
+}

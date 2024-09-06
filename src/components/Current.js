@@ -1,5 +1,4 @@
 const Current = ({ data }) => {
-    console.log(data)
     return <>
         <h1>{data.temp}°C</h1>
         {data.city} <br />

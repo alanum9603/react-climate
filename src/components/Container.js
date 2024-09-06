@@ -5,6 +5,7 @@ import SearchBox from './SearchBox';
 import './Container.css'
 import useFetchClimate from '../hooks/useFetchClimate';
 import Current from './Current'
+import ClimateCard from './ClimateCard';
 
 const Container = () => {
   const [climatedata, setClimatedata] = useState({ data: null, error: null})
@@ -25,7 +26,7 @@ const Container = () => {
           {climate.state === 'success' && <Current data={climate.data.current} />}
         </section>
         <section className='climate prediction' data={climatedata.daily} >
-          {climate.state === 'success'}
+          {climate.state === 'success' && <ClimateCard data={climate.data.daily} />}
         </section>
         <section className='climate day-pred' >day-pred</section>
       </main>

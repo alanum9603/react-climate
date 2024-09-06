@@ -38,7 +38,7 @@ const SearchBox = ({ setClimatedata }) => {
                         </>
                 })
             }
-        </div >
+        </div>
     )
 }
 
