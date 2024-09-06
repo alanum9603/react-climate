@@ -1,13 +1,8 @@
-* {
-    font-family: 'JetBrains Mono';
-    color: white;
-}
-
 .searchbox {
     display: grid;
     grid-template-rows: repeat(6, 1fr);
     padding: 0;
-    min-height: 420px;
+    min-height: 300px;
     width: 96%;
     margin: 2%;
     border-radius: 10px;
@@ -27,7 +22,7 @@ input.text {
     font-size: 18px;
     width: 80%;
     background-color: #282c34;
-    color: white;
+    color: #e0e0e0;
     border-width: 0;
     border-top-left-radius: 10px;
 }

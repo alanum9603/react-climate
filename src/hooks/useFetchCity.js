@@ -34,7 +34,7 @@ const useFetchCity = (city) => {
             }
         }
         searchCity(url)
-    }, [city]);
+    }, [city, url]);
     return fetchState
 }
 

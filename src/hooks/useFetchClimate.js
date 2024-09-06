@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
-const useFetchClimate = async (lat, lon) => {
+const useFetchClimate = (climatedata) => {
     const [fetchState, setFetchState] = useState({state: 'idle', data: null, error: null})
-    const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${process.env.REACT_APP_API_KEY}`;
+    const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${climatedata.lat}&lon=${climatedata.lon}&exclude=hourly,minutely&units=metric&appid=${process.env.REACT_APP_API_KEY}`;
     useEffect(() => {
         const searchClimate = async () => {
             try {
@@ -15,7 +15,15 @@ const useFetchClimate = async (lat, lon) => {
                     const json = await response.json();
                     setFetchState({
                         state: 'success',
-                        data: json,
+                        data: {
+                            current: {
+                                ...json.current,
+                                city: climatedata.city,
+                                lat: json.lat,
+                                lon: json.lon,
+                            },
+                            daily: { ...json.daily }
+                        },
                         error: null
                     })
                 } else {
@@ -33,9 +41,9 @@ const useFetchClimate = async (lat, lon) => {
                 })
             }
         }
-        searchClimate(url)
-    }, [lat, lon]);
-    return fetchState
+        if (climatedata.data !== null) searchClimate(url)
+    }, [climatedata, url]);
+    return { ...fetchState }
 }
 
 export default useFetchClimate
