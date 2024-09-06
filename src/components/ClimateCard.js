@@ -8,7 +8,9 @@ const ClimateCard = ({ data }) => {
                 data.map(item => {
                     return <div className='item'>
                             {item.date}
-                            <img src={`https://openweathermap.org/img/wn/${item.weather['0'].icon}@2x.png`} alt={`[${item.weather['0'].description}]`}/><br /> 
+                            <div className='climate-img'>
+                                <img  src={`https://openweathermap.org/img/wn/${item.weather['0'].icon}@2x.png`} alt={`[${item.weather['0'].description}]`}/><br /> 
+                            </div>
                             {item.weather['0'].description}
                         </div>
 

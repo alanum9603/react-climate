@@ -9,5 +9,26 @@
     width: 105px;
     align-items: center;
     text-align: center;
-    display: inline;
+    display: flex;
+    flex-direction: column;
+}
+
+.climate-img {
+    place-self: center; 
+    width: 70px;   
+    height: 70px; 
+    overflow: hidden; 
+    position: relative;
+}
+
+img {
+    object-fit: cover;
+    clip-path: polygon(15% 15%, 15% 85%, 85% 85%, 85% 15%);
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;     
+    height: 100px;    
+    transform: translate(-50%, -50%); 
 }
